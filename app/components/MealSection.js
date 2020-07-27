@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Card, Icon, Button } from '@ui-kitten/components';
+import { Text, Card, Icon } from '@ui-kitten/components';
 
 export default (props) => {
 
@@ -10,7 +10,7 @@ export default (props) => {
         {props.title}
       </Text>
       <Icon
-        name='plus-circle-outline'
+        name='plus-circle'
         fill='grey'
         style={styles.icon}
         onPress={() => props.navigate('Search')} />
