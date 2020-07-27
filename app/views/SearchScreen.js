@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { Icon, Divider, TopNavigation, TopNavigationAction, Layout, Input, Text} from '@ui-kitten/components';
+import { SafeAreaView, Image, StyleSheet } from 'react-native';
+import { Icon, Divider, TopNavigation, TopNavigationAction, Layout, Input, List, ListItem, Button } from '@ui-kitten/components';
+
+import FoodCard from '../components/FoodCard';
 
 const requestHeaders = {
   "x-app-id": "05e754e7",
@@ -15,6 +17,22 @@ export default ({ navigation }) => {
       <TopNavigationAction 
         onPress={() => navigation.goBack()}
         icon={(props) => <Icon {...props} name='arrow-back'/>}/>
+    )
+  }
+
+  const renderLeft = (uri) => {
+    console.log(uri);
+    return (
+      <Image 
+        style={styles.img}
+        source={{ uri: uri }}
+      />
+    )
+  }
+
+  const renderRight = () => {
+    return (
+      <Button size='tiny'>Ajouter</Button>
     )
   }
 
@@ -35,12 +53,13 @@ export default ({ navigation }) => {
   const [results, setResults] = useState([]);
   const [loadingResults, setLoadingResults] = useState(true);
   
-  let renderedResults;
-  if (!loadingResults) {
-    renderedResults = results.map(result => <Text>{result.food_name}</Text>)
-  } else {
-    renderedResults = <Text>Aucun résultat</Text>
-  }
+  const renderItem = ({ item, index }) => (
+    <ListItem
+      title={item.food_name}
+      accessoryLeft={() => renderLeft(item.photo.thumb)}
+      accessoryRight={renderRight}
+    />
+  );
   
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -56,14 +75,19 @@ export default ({ navigation }) => {
           onChangeText={input => setValue(input)}
           onSubmitEditing={() => getMeals(value)}
         />
-        {renderedResults}
+        <List 
+          data={results}
+          renderItem={renderItem}
+          extraData={results}
+        />
       </Layout>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 10,
-  },
+  img: {
+    height: 40,
+    width: 40
+  }
 })
