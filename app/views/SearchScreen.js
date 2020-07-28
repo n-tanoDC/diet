@@ -9,7 +9,7 @@ const requestHeaders = {
   "x-remote-user-id": 0
 }
 
-export default ({ navigation }) => {
+export default ({ route, navigation }) => {
 
   const getMeals = (input) => {
     setLoadingResults(true)
@@ -44,7 +44,10 @@ export default ({ navigation }) => {
   
   return (
     <Container>
-      <CustomHeader title="Ajouter un aliment" left="back" navigation={navigation} />
+      <CustomHeader
+        title="Ajouter un aliment"
+        subtitle={route.params.subtitle}
+        left="back" navigation={navigation} />
       <Content>
         <Item>
           <Input

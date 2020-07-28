@@ -11,7 +11,7 @@ export default (props) => {
         <Right>
           <Badge primary>
             <Icon 
-              onPress={() => props.navigate('Search')}
+              onPress={() => props.navigate('Search', { subtitle: props.title })}
               type="MaterialIcons"
               name="add"
               style={styles.icon} />
