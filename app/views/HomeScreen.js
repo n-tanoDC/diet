@@ -1,7 +1,7 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { Divider, Layout, TopNavigation, Button } from '@ui-kitten/components';
 import MealSection from '../components/MealSection';
+import { Container, Content, Button, Text } from 'native-base';
+import CustomHeader from '../components/CustomHeader';
 
 const mealSections = [
   "Petit Déjeuner", "Déjeuner", "Diner"
@@ -12,13 +12,14 @@ export default ({ navigation }) => {
   const renderedSections = mealSections.map((section, index) => <MealSection key={index} title={section} navigate={navigation.navigate}/>) 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <TopNavigation title="Aujourd'hui" alignment='center'/>
-      <Divider/>
-      <Layout style={{ padding: 10 }}>
+    <Container>
+      <CustomHeader title="Aujourd'hui" left="home" />
+      <Content>
         {renderedSections}
-        {/* // Todo => Créer et rendre un composant Summary */}
-      </Layout>
-    </SafeAreaView>
+        <Button full onPress={() => navigation.navigate('Search')}>
+          <Text>Rechercher</Text>
+        </Button>
+      </Content>
+    </Container>
   );
 };

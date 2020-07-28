@@ -1,49 +1,64 @@
 import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
-import { Divider, TopNavigation, Layout, Input } from '@ui-kitten/components';
-import { BackAction } from '../components/SmallComponents';
+import { Container, Item, Content, Input, Spinner, Button, Text } from 'native-base';
 import SearchResults from '../components/SearchResults';
+import CustomHeader from '../components/CustomHeader';
 
 const requestHeaders = {
-  "x-app-id": "05e754e7",
-  "x-app-key": "107ea2f449d4e88d05e32f46d25b7746",
+  "x-app-id": "ff0ccea8",
+  "x-app-key": "605660a17994344157a78f518a111eda",
   "x-remote-user-id": 0
 }
 
 export default ({ navigation }) => {
 
   const getMeals = (input) => {
+    setLoadingResults(true)
     fetch('https://trackapi.nutritionix.com/v2/search/instant?query=' + input + '&locale=fr_FR', {
       headers: requestHeaders
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data.common);
         setResults(data.common);
         setLoadingResults(false); 
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        setLoadingResults(false);
+      })
   }
 
   const [value, setValue] = useState('');
-  const [results, setResults] = useState([]);
-  const [loadingResults, setLoadingResults] = useState(true);
+  const [results, setResults] = useState(null);
+  const [loadingResults, setLoadingResults] = useState(false);
+  
+  let outputResults;
+
+  if (loadingResults) {
+    outputResults = <Spinner />
+  } else {
+    if (results) {
+      outputResults = <SearchResults results={results} />
+    }
+  }
   
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <TopNavigation 
-        title="Ajouter un aliment"
-        alignment="center"
-        accessoryLeft={() => <BackAction goBack={navigation.goBack}/>}
-      />
-      <Divider />
-      <Layout style={{ padding: 10 }}>
-        <Input
-          placeholder="Recherchez un ingrédient"
-          onChangeText={input => setValue(input)}
-          onSubmitEditing={() => getMeals(value)}
-        />
-        <SearchResults results={results} />
-      </Layout>
-    </SafeAreaView>
+    <Container>
+      <CustomHeader title="Ajouter un aliment" left="back" navigation={navigation} />
+      <Content>
+        <Item>
+          <Input
+            placeholder="Recherchez un ingrédient"
+            onChangeText={input => setValue(input)}
+            onSubmitEditing={() => getMeals(value)}
+          />
+        </Item>
+        {outputResults}
+        <Button full onPress={() => console.log(results)}>
+          <Text>Debug</Text>
+        </Button>
+      </Content>
+    </Container>
   );
 };
+
