@@ -18,7 +18,6 @@ export default ({ navigation }) => {
       <Layout style={{ padding: 10 }}>
         {renderedSections}
         {/* // Todo => Créer et rendre un composant Summary */}
-        <Button onPress={() => navigation.navigate('Search')}>Recherche</Button>
       </Layout>
     </SafeAreaView>
   );
