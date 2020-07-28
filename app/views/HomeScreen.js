@@ -2,6 +2,7 @@ import React from 'react';
 import MealSection from '../components/MealSection';
 import { Container, Content, Button, Text } from 'native-base';
 import CustomHeader from '../components/CustomHeader';
+import { StyleSheet } from 'react-native';
 
 const mealSections = [
   "Petit Déjeuner", "Déjeuner", "Diner"
@@ -14,12 +15,15 @@ export default ({ navigation }) => {
   return (
     <Container>
       <CustomHeader title="Aujourd'hui" left="home" />
-      <Content>
+      <Content style={styles.contentContainer}>
         {renderedSections}
-        <Button full onPress={() => navigation.navigate('Search')}>
-          <Text>Rechercher</Text>
-        </Button>
       </Content>
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    padding: 5,
+  }
+})
