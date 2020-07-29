@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Item, Content, Input, Spinner, Button, Text } from 'native-base';
 import SearchResults from '../components/SearchResults';
 import CustomHeader from '../components/CustomHeader';
+import { saveData } from '../functions';
 
 const requestHeaders = {
   "x-app-id": "ff0ccea8",
@@ -18,7 +19,6 @@ export default ({ route, navigation }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data.common);
         setResults(data.common);
         setLoadingResults(false); 
       })
@@ -32,6 +32,8 @@ export default ({ route, navigation }) => {
   const [results, setResults] = useState(null);
   const [loadingResults, setLoadingResults] = useState(false);
   
+  const { subtitle, storageKey } = route.params;
+
   let outputResults;
 
   if (loadingResults) {
@@ -46,8 +48,10 @@ export default ({ route, navigation }) => {
     <Container>
       <CustomHeader
         title="Ajouter un aliment"
-        subtitle={route.params.subtitle}
-        left="back" navigation={navigation} />
+        subtitle={subtitle}
+        left="back"
+        navigation={navigation}
+      />
       <Content>
         <Item>
           <Input
@@ -57,8 +61,8 @@ export default ({ route, navigation }) => {
           />
         </Item>
         {outputResults}
-        <Button full onPress={() => console.log(results)}>
-          <Text>Debug</Text>
+        <Button full onPress={() => saveData(storageKey, results)}>
+          <Text>Save</Text>
         </Button>
       </Content>
     </Container>
