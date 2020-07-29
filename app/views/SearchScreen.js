@@ -14,11 +14,12 @@ export default ({ route, navigation }) => {
 
   const getMeals = (input) => {
     setLoadingResults(true)
-    fetch('https://trackapi.nutritionix.com/v2/search/instant?query=' + input + '&locale=fr_FR', {
+    fetch('https://trackapi.nutritionix.com/v2/search/instant?query=' + input + '&locale=fr_FR&detailed=true', {
       headers: requestHeaders
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setResults(data.common);
         setLoadingResults(false); 
       })
