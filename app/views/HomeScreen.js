@@ -19,7 +19,7 @@ export default ({ navigation }) => {
   const renderedSections = mealSections.map((section, index) => (
     <MealSection
       key={index}
-      items={data.filter(element => element.meal === section)}
+      items={data}
       storageKey={STORAGE_KEY}
       title={section}
       navigate={navigation.navigate}/>
@@ -30,10 +30,7 @@ export default ({ navigation }) => {
       <CustomHeader title="Aujourd'hui" left="home" />
       <Content style={styles.contentContainer}>
         {renderedSections}
-        <Summary />
-        <Button full onPress={() => console.log(data)}>
-          <Text>Debug</Text>
-        </Button>
+        <Summary data={data} />
       </Content>
     </Container>
   );
