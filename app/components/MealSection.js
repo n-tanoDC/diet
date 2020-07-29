@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardItem, Text, Icon, Right, Badge, Spinner } from 'native-base';
+import { Card, CardItem, Text, Icon, Right, Badge, Button } from 'native-base';
 import { StyleSheet } from 'react-native';
 import FoodItem from './FoodItem';
-import { readData } from '../functions';
-import { useIsFocused } from "@react-navigation/native";
 
 export default (props) => {
-  const { storageKey, title, navigate} = props;
-  const isFocused = useIsFocused();
-
-  const [items, setItems] = useState([]);
-  
-  useEffect(() => { readData(storageKey, setItems) }, [isFocused])
+  const { storageKey, items, title, navigate} = props;  
 
   let renderedItems;
   
   if (items) {
-    renderedItems = items.filter(item => item.meal === title)
-      .map(item => <FoodItem key={item.food_name} storageKey={storageKey} item={item} />)
+    renderedItems = items.map(item => (
+      <FoodItem
+        key={item.food_name}
+        storageKey={storageKey}
+        item={item}
+      />))
   } else {
     renderedItems = (<></>)
   }
