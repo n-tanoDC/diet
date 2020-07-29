@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Item, Content, Input, Spinner } from 'native-base';
 import SearchResults from '../components/SearchResults';
 import CustomHeader from '../components/CustomHeader';
-import { getMeals } from '../functions';
+import { fetchData } from '../functions/data';
 
 export default ({ route, navigation }) => {
 
@@ -40,7 +40,7 @@ export default ({ route, navigation }) => {
           <Input
             placeholder="Recherchez un ingrédient"
             onChangeText={input => setValue(input)}
-            onSubmitEditing={() => getMeals(value, setResults, setLoadingResults)}
+            onSubmitEditing={() => fetchData(value, setResults, setLoadingResults)}
           />
         </Item>
         {outputResults}

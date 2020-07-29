@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import FoodItem from './FoodItem';
 
 export default (props) => {
-  const { storageKey, items, title, navigate} = props;  
+  const { items, title, navigate} = props;  
 
   let renderedItems;
   
@@ -13,7 +13,6 @@ export default (props) => {
       .map(item => (
       <FoodItem
         key={item.food_name}
-        storageKey={storageKey}
         item={item}
       />))
   } else {
@@ -27,7 +26,7 @@ export default (props) => {
         <Right>
           <Badge primary>
             <Icon 
-              onPress={() => navigate('Search', { subtitle: title, storageKey: storageKey })}
+              onPress={() => navigate('Search', { subtitle: title })}
               type="MaterialIcons"
               name="add"
               style={styles.icon} />

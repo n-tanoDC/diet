@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Left, Body, Title, Right, Button, Icon, Text, Subtitle } from 'native-base';
+import { Header, Left, Body, Title, Right, Button, Icon, Subtitle } from 'native-base';
 
 export default (props) => {
   const { title, left, subtitle, navigation } = props;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { List, ListItem, Text, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { addData } from '../functions';
+import { addItem } from '../functions/storage';
 
 export default (props) => {
 
-  const { meal, results, storageKey } = props;
+  const { meal, results } = props;
   
   if (!results[0]) {
     return (
@@ -18,7 +18,7 @@ export default (props) => {
       <Text>{result.food_name}</Text>
       <Icon 
         name="add-outline"
-        onPress={() => addData(storageKey, { ...result, meal: meal })}
+        onPress={() => addItem({ ...result, meal: meal })}
       /> 
     </ListItem>
   ))
