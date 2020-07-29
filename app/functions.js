@@ -36,3 +36,22 @@ export const addData = (key, value) => {
     console.log(err);
   });
 }
+
+export const removeData = (key, value, success) => {
+  let newData;
+  AsyncStorage.getItem(key)
+    .then(res => JSON.parse(res))
+    .then(data => {
+      const index = data.findIndex(element => element.food_name === value.food_name);
+      newData = data;
+      newData.splice(index, 1);
+    })
+  .then(() => {
+    newData = JSON.stringify(newData);
+    AsyncStorage.setItem(key, newData);
+    success(true);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
