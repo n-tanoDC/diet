@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardItem, Text, Icon, Right, Badge, Button } from 'native-base';
+import React from 'react';
+import { Card, CardItem, Text, Icon, Right, Badge } from 'native-base';
 import { StyleSheet } from 'react-native';
 import FoodItem from './FoodItem';
 
@@ -9,7 +9,8 @@ export default (props) => {
   let renderedItems;
   
   if (items) {
-    renderedItems = items.map(item => (
+    renderedItems = items.filter(element => element.meal === title)
+      .map(item => (
       <FoodItem
         key={item.food_name}
         storageKey={storageKey}
