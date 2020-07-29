@@ -1,26 +1,49 @@
-import React from 'react';
-import { Card, CardItem, Text, Body, Icon, Right, Button, Badge } from 'native-base';
+import React, { useState, useEffect } from 'react';
+import { Card, CardItem, Text, Icon, Right, Badge, Spinner } from 'native-base';
 import { StyleSheet } from 'react-native';
+import FoodItem from './FoodItem';
+import { readData } from '../functions';
+import { useIsFocused } from "@react-navigation/native";
 
 export default (props) => {
+  const { storageKey, title, navigate} = props;
+  const isFocused = useIsFocused();
 
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => { console.log('useLayoutEffect'); readData(storageKey, setItems, setLoading) }, [isFocused])
+
+  let renderedItems;
+  
+  if (loading) {
+    renderedItems = <Spinner />
+  } else {
+    if (items) {
+      renderedItems = items.map(item => <FoodItem key={item.tag_id} item={item} />)
+    } else {
+      renderedItems = (
+      <CardItem>
+        <Text>Aucun aliment ajouté.</Text>
+      </CardItem>)
+    }
+  }
+  
   return (
     <Card>
       <CardItem header bordered style={styles.cardHeader}>
-        <Text>{props.title}</Text>
+        <Text>{title}</Text>
         <Right>
           <Badge primary>
             <Icon 
-              onPress={() => props.navigate('Search', { subtitle: props.title })}
+              onPress={() => navigate('Search', { subtitle: title, storageKey: storageKey })}
               type="MaterialIcons"
               name="add"
               style={styles.icon} />
           </Badge>
         </Right>
       </CardItem>
-      <CardItem>
-        <Text>Aucun aliment ajouté.</Text>
-      </CardItem>
+      {renderedItems}
     </Card>
   )
 }
