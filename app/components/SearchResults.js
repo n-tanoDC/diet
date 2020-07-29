@@ -14,7 +14,7 @@ export default (props) => {
   }
   
   const renderedResults = results.map(result => (
-    <ListItem key={result.tag_id} style={styles.listItem}>
+    <ListItem key={result.food_name} style={styles.listItem}>
       <Text>{result.food_name}</Text>
       <Icon 
         name="add-outline"

@@ -16,7 +16,7 @@ export default (props) => {
   let renderedItems;
   
   if (items) {
-    renderedItems = items.map(item => <FoodItem key={item.tag_id} storageKey={storageKey} item={item} />)
+    renderedItems = items.map(item => <FoodItem key={item.food_name} storageKey={storageKey} item={item} />)
   } else {
     renderedItems = (<></>)
   }
