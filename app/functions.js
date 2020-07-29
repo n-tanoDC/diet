@@ -20,7 +20,7 @@ export const saveData = async (key, value) => {
   }
 }
 
-export const addData = (key, value) => {
+export const addData = (key, value, meal) => {
   let newData;
   AsyncStorage.getItem(key)
   .then(res => JSON.parse(res))

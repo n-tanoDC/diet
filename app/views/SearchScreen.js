@@ -41,7 +41,12 @@ export default ({ route, navigation }) => {
     outputResults = <Spinner />
   } else {
     if (results) {
-      outputResults = <SearchResults storageKey={storageKey} results={results} />
+      outputResults = (
+        <SearchResults
+          storageKey={storageKey}
+          meal={subtitle}
+          results={results} />
+      )
     }
   }
   

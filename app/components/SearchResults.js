@@ -5,7 +5,7 @@ import { addData } from '../functions';
 
 export default (props) => {
 
-  const { results, storageKey } = props;
+  const { meal, results, storageKey } = props;
   
   if (!results[0]) {
     return (
@@ -18,7 +18,7 @@ export default (props) => {
       <Text>{result.food_name}</Text>
       <Icon 
         name="add-outline"
-        onPress={() => addData(storageKey, result)}
+        onPress={() => addData(storageKey, { ...result, meal: meal })}
       /> 
     </ListItem>
   ))
