@@ -12,23 +12,19 @@ export default (props) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   
-  useEffect(() => { console.log('useLayoutEffect'); readData(storageKey, setItems, setLoading) }, [isFocused])
+  useEffect(() => { readData(storageKey, setItems, setLoading) }, [isFocused])
 
   let renderedItems;
   
-  if (loading) {
-    renderedItems = <Spinner />
+  if (items) {
+    renderedItems = items.map(item => <FoodItem key={item.tag_id} item={item} />)
   } else {
-    if (items) {
-      renderedItems = items.map(item => <FoodItem key={item.tag_id} item={item} />)
-    } else {
-      renderedItems = (
-      <CardItem>
-        <Text>Aucun aliment ajouté.</Text>
-      </CardItem>)
-    }
+    renderedItems = (
+    <CardItem>
+      <Text>Aucun aliment ajouté.</Text>
+    </CardItem>)
   }
-  
+
   return (
     <Card>
       <CardItem header bordered style={styles.cardHeader}>
