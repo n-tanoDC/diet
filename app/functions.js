@@ -1,16 +1,13 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const readData = (key, callback, loading) => {
-  loading(true)
+export const readData = (key, callback) => {
   AsyncStorage.getItem(key)
   .then(res => JSON.parse(res))
   .then(data => {
     callback(data)
-    loading(false)
   })
   .catch(err => {
     console.log(err);
-    loading(false)
   });
 }
   
