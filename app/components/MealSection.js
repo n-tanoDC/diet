@@ -10,19 +10,15 @@ export default (props) => {
   const isFocused = useIsFocused();
 
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
   
-  useEffect(() => { readData(storageKey, setItems, setLoading) }, [isFocused])
+  useEffect(() => { readData(storageKey, setItems) }, [isFocused])
 
   let renderedItems;
   
   if (items) {
-    renderedItems = items.map(item => <FoodItem key={item.tag_id} item={item} />)
+    renderedItems = items.map(item => <FoodItem key={item.tag_id} storageKey={storageKey} item={item} />)
   } else {
-    renderedItems = (
-    <CardItem>
-      <Text>Aucun aliment ajouté.</Text>
-    </CardItem>)
+    renderedItems = (<></>)
   }
 
   return (
