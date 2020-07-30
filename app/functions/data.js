@@ -1,3 +1,5 @@
+import { Alert } from "react-native";
+
 const requestHeaders = {
   "x-app-id": "ff0ccea8",
   "x-app-key": "605660a17994344157a78f518a111eda",
@@ -11,12 +13,12 @@ export const fetchData = (input, callback, loading) => {
   })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       callback(data.common);
       loading(false); 
     })
     .catch(err => {
-      console.log(err)
+      Alert.alert("connexion à la base de données impossible.\nVeuillez réessayer ultérieurement.")
+      console.log(err);
       loading(false);
     })
 }
