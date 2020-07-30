@@ -54,18 +54,19 @@ export const removeItem = (value, deleted) => {
   });
 }
 
-export const saveUser = (value, callback) => {
+export const saveUser = (value, displayModal, resetUser) => {
+  resetUser(value);
   const userValue = JSON.stringify(value);
   AsyncStorage.setItem(USER_KEY, userValue)
-    .then(() => callback(true))
+    .then(() => displayModal(false))
 }
 
-export const getUser = (callback) => {
+export const getUser = (callback, loading) => {
+  loading(true)
   AsyncStorage.getItem(USER_KEY)
     .then(res => JSON.parse(res))
-    .then(data => {
-      callback(data)
-    })
+    .then(data => callback(data))
+    .then(() => loading(false))
     .catch(err => {
       console.log(err);
     });
