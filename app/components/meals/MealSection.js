@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardItem, Text, Icon, Right, Badge } from 'native-base';
 import { StyleSheet } from 'react-native';
-import FoodItem from './FoodItem';
+import FoodItem from './MealItem';
 
 export default (props) => {
   const { items, title, navigate, deleted } = props;  

@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardItem, Text, Right, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { removeItem } from '../functions/storage';
+import { removeItem } from '../../functions/storage';
 
 export default (props) => {
   const { item, deleted } = props;

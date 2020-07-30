@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardItem, Card, Text, Button } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
-import { getTotalsPerNutrient, getNutriData } from '../functions/nutrients';
+import { getTotalsPerNutrient, getNutriData } from '../../functions/nutrients';
 
 export default (props) => {
   const { data } = props;
