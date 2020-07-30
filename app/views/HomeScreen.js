@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
-import { Container, Content } from 'native-base';
+import { Container, Content, Button, Text } from 'native-base';
 
 import MealSection from '../components/meals/MealSection';
 import CustomHeader from '../components/CustomHeader';
 import Summary from '../components/summary/SummarySection';
 
-import { readItems } from '../functions/storage';
+import { readItems, clearItems } from '../functions/storage';
 
 const mealSections = ["Petit déjeuner", "Déjeuner", "Dîner"];
 
@@ -36,6 +36,11 @@ export default ({ navigation }) => {
         {renderedSections}
         <Summary data={data} />
       </Content>
+      <Button 
+        full warning
+        onPress={() => clearItems(setData)}>
+        <Text>Réinitialiser</Text>
+      </Button>
     </Container>
   );
 };

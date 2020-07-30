@@ -2,6 +2,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const STORAGE_KEY = "@save-item"
 
+export const clearItems = (callback) => {
+  let emptyValue = JSON.stringify([]);
+  AsyncStorage.setItem(STORAGE_KEY, emptyValue)
+    .then(() => callback([]))
+}
+
 export const readItems = (callback) => {
   AsyncStorage.getItem(STORAGE_KEY)
   .then(res => JSON.parse(res))
