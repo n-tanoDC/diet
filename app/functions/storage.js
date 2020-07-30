@@ -13,7 +13,7 @@ export const readItems = (callback) => {
   });
 }
 
-export const addItem = (value) => {
+export const addItem = (value, setAdded) => {
   let newData;
   AsyncStorage.getItem(STORAGE_KEY)
   .then(res => JSON.parse(res))
@@ -21,6 +21,7 @@ export const addItem = (value) => {
   .then(() => {
     newData = JSON.stringify(newData);
     AsyncStorage.setItem(STORAGE_KEY, newData);
+    setAdded(true);
   })
   .catch(err => {
     console.log(err);
