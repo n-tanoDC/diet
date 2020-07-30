@@ -1,6 +1,5 @@
 import React from 'react';
-import { CardItem, Card, Text, Button } from 'native-base';
-import AsyncStorage from '@react-native-community/async-storage';
+import { CardItem, Card, Text } from 'native-base';
 import { getTotalsPerNutrient, getNutriData } from '../../functions/nutrients';
 
 export default (props) => {
@@ -24,9 +23,6 @@ export default (props) => {
         <Text>Résumé</Text>
       </CardItem>
       {renderedTotals}
-      <Button full onPress={() => AsyncStorage.clear()}>
-        <Text>Debug</Text>
-      </Button>
     </Card>
   )
 }
