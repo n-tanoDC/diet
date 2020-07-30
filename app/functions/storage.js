@@ -27,7 +27,7 @@ export const addItem = (value) => {
   });
 }
 
-export const removeItem = (value, success) => {
+export const removeItem = (value, deleted) => {
   let newData;
   AsyncStorage.getItem(STORAGE_KEY)
     .then(res => JSON.parse(res))
@@ -39,7 +39,7 @@ export const removeItem = (value, success) => {
   .then(() => {
     newData = JSON.stringify(newData);
     AsyncStorage.setItem(STORAGE_KEY, newData);
-    success(true);
+    deleted(true)
   })
   .catch(err => {
     console.log(err);

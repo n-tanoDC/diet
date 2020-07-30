@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import MealSection from '../components/MealSection';
-import { Container, Content, Button, Text } from 'native-base';
-import CustomHeader from '../components/CustomHeader';
 import { StyleSheet } from 'react-native';
-import Summary from '../components/Summary';
-import { readItems } from '../functions/storage';
 import { useIsFocused } from "@react-navigation/native";
+import { Container, Content } from 'native-base';
+
+import MealSection from '../components/MealSection';
+import CustomHeader from '../components/CustomHeader';
+import Summary from '../components/Summary';
+
+import { readItems } from '../functions/storage';
 
 const mealSections = ["Petit déjeuner", "Déjeuner", "Dîner"];
 
 export default ({ navigation }) => {
   const isFocused = useIsFocused();
-  const [data, setData] = useState([]);
 
-  useEffect(() => { readItems(setData) }, [isFocused]);
+  const [data, setData] = useState([]);
+  const [itemDeleted, setItemDeleted] = useState(false);
+
+  useEffect(() => { readItems(setData) }, [isFocused, itemDeleted]);
+  useEffect(() => { setItemDeleted(false) }, [data]);
   
   const renderedSections = mealSections.map((section, index) => (
     <MealSection
       key={index}
       items={data}
       title={section}
+      deleted={setItemDeleted}
       navigate={navigation.navigate}/>
   ))
 

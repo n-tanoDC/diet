@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import FoodItem from './FoodItem';
 
 export default (props) => {
-  const { items, title, navigate} = props;  
+  const { items, title, navigate, deleted } = props;  
 
   let renderedItems;
   
@@ -14,6 +14,7 @@ export default (props) => {
       <FoodItem
         key={item.food_name}
         item={item}
+        deleted={deleted}
       />))
   } else {
     renderedItems = (<></>)

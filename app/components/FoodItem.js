@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CardItem, Text, Right, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { removeItem } from '../functions/storage';
 
 export default (props) => {
-  const { item } = props;
-  const [deleteSuccess, setDeleteSuccess] = useState(false)
-
-  if (deleteSuccess) {
-    return (
-      <></>
-    )
-  }
+  const { item, deleted } = props;
   
   return (
     <CardItem style={styles.cardItemContainer}>
@@ -19,7 +12,7 @@ export default (props) => {
       <Right>
         <Icon
           name="trash"
-          onPress={() => removeItem(item, setDeleteSuccess)} />
+          onPress={() => removeItem(item, deleted)} />
       </Right>
     </CardItem>
   )
