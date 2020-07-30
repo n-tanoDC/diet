@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
 import { Container, Content } from 'native-base';
 
-import MealSection from '../components/MealSection';
+import MealSection from '../components/meals/MealSection';
 import CustomHeader from '../components/CustomHeader';
-import Summary from '../components/Summary';
+import Summary from '../components/summary/SummarySection';
 
 import { readItems } from '../functions/storage';
 

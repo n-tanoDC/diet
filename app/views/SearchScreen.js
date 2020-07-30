@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Item, Content, Input, Spinner } from 'native-base';
-import SearchResults from '../components/SearchResults';
+import SearchResults from '../components/search/SearchResults';
 import CustomHeader from '../components/CustomHeader';
 import { fetchData } from '../functions/data';
 
