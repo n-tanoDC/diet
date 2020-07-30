@@ -3,7 +3,6 @@ import { Alert } from "react-native";
 const requestHeaders = {
   "x-app-id": "ff0ccea8",
   "x-app-key": "605660a17994344157a78f518a111eda",
-  "x-remote-user-id": 0
 }
 
 export const fetchData = (input, callback, loading) => {
