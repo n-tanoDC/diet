@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Header, Left, Body, Title, Right, Button, Icon } from 'native-base';
 
 export default (props) => {
-  const { title, setModalVisible } = props;
+  const { title, displayModal } = props;
 
   return (
     <Header>
@@ -15,7 +15,7 @@ export default (props) => {
           <Icon 
             name="person-circle"
             style={{ fontSize: 32 }} 
-            onPress={() => setModalVisible(true)}/>
+            onPress={() => displayModal(true)}/>
         </Button>
       </Right>
     </Header>
