@@ -17,7 +17,7 @@ export default ({ navigation }) => {
 
   const [data, setData] = useState([]);
   const [itemDeleted, setItemDeleted] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalDisplayed, displayModal] = useState(false);
 
   useEffect(() => { readItems(setData) }, [isFocused, itemDeleted]);
   useEffect(() => { setItemDeleted(false) }, [data]);
@@ -33,8 +33,8 @@ export default ({ navigation }) => {
 
   return (
     <Container>
-      <UserModal visible={modalVisible} setVisible={setModalVisible} />
-      <HomeHeader setModalVisible={setModalVisible} title="Aujourd'hui"/>
+      <UserModal modalDisplayed={modalDisplayed} displayModal={displayModal} />
+      <HomeHeader displayModal={displayModal} title="Aujourd'hui"/>
       <Content style={styles.contentContainer}>
         {renderedSections}
         <Summary data={data} />
