@@ -4,10 +4,11 @@ import { useIsFocused } from "@react-navigation/native";
 import { Container, Content, Button, Text } from 'native-base';
 
 import MealSection from '../components/meals/MealSection';
-import CustomHeader from '../components/CustomHeader';
+import HomeHeader from '../components/headers/HomeHeader';
 import Summary from '../components/summary/SummarySection';
 
 import { readItems, clearItems } from '../functions/storage';
+import UserModal from '../components/user/UserModal';
 
 const mealSections = ["Petit déjeuner", "Déjeuner", "Dîner"];
 
@@ -16,6 +17,7 @@ export default ({ navigation }) => {
 
   const [data, setData] = useState([]);
   const [itemDeleted, setItemDeleted] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => { readItems(setData) }, [isFocused, itemDeleted]);
   useEffect(() => { setItemDeleted(false) }, [data]);
@@ -31,7 +33,8 @@ export default ({ navigation }) => {
 
   return (
     <Container>
-      <CustomHeader title="Aujourd'hui" left="home" />
+      <UserModal visible={modalVisible} setVisible={setModalVisible} />
+      <HomeHeader setModalVisible={setModalVisible} title="Aujourd'hui"/>
       <Content style={styles.contentContainer}>
         {renderedSections}
         <Summary data={data} />
